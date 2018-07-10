@@ -26,11 +26,11 @@ struct zynq_pwm_data {
 };
 
 
-static const struct of_device_id lpc18xx_pwm_of_match[] = {
+static const struct of_device_id zynq_pwm_of_match[] = {
     { .compatible = "xlnx,xps-timer-1.00.a" },
     {}
 };
-MODULE_DEVICE_TABLE(of, lpc18xx_pwm_of_match);
+MODULE_DEVICE_TABLE(of, zynq_pwm_of_match);
 
 
 static int zynq_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm, int duty_ns, int period_ns);
