@@ -50,14 +50,15 @@ MODULE_DEVICE_TABLE(of, zynq_pwm_of_match);
 
 static int zynq_pwm_probe(struct platform_device *pdev) {
     struct zynq_pwm_chip *zynq_pwm;
-    struct resource *res;
     struct pwm_device *pwm;
+    struct resource *res;
     int ret,i;
     // allocate memory
-    pwm = devm_kzalloc(&pdev->dev, sizeof(*pwm), GFP_KERNEL);
-    if (!pwm)
-        return -ENOMEM;
+    zynq_pwm = devm_kzalloc(&pdev->dev, sizeof(*zynq_pwm), GFP_KERNEL);
+    if (!zynq_pwm)
+        return -ENOMEM;    
     // get the base addr to res
+    zynq_pwm->dev = &pdev->dev;
     res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
     if (!res) 
             return -ENODEV;
@@ -74,9 +75,10 @@ static int zynq_pwm_probe(struct platform_device *pdev) {
     zynq_pwm->chip.dev = &pdev->dev;
     zynq_pwm->chip.ops = &zynq_pwm_ops;
     zynq_pwm->chip.base = -1;
-    zynq_pwm->chip.npwm = 1;
+    zynq_pwm->chip.npwm = 2;
+    //bug??
     //zynq_pwm->chip.of_xlate = of_pwm_xlate_with_flags;
-    zynq_pwm->chip.of_pwm_n_cells = 1;
+    zynq_pwm->chip.of_pwm_n_cells = 3;
 
     ret = pwmchip_add(&zynq_pwm->chip);
     if (ret < 0) {
