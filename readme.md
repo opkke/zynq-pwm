@@ -18,7 +18,7 @@ Makefile  Module.symvers   modules.order zynq-pwm.c  zynq-pwm.ko  zynq-pwm.mod.c
 
 ### Export the pwm channel
 ```
-[gty@zedminer zynq-pwm]$ echo 0 > /sys/class//pwm/pwmchip0/export
+[gty@zedminer zynq-pwm]$ echo 0 > /sys/class/pwm/pwmchip0/export
 [gty@zedminer zynq-pwm]$ cd /sys/class/pwm/pwmchip0/pwm0/
 [gty@zedminer zynq-pwm]$ ls
 capture  duty_cycle  enable  period  polarity  power  uevent
